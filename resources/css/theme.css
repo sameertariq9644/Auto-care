@@ -1,0 +1,156 @@
+/*
+ * Light / dark theme support.
+ *
+ * Every page declares the theme it was designed in via <html data-native="dark|light">.
+ * The theme-head partial adds `.dark` or `.light` to <html> from the saved preference
+ * (falling back to the native theme). The overrides below only kick in when the chosen
+ * theme differs from the page's native one:
+ *   - html.light[data-native="dark"]  → dark-designed pages (customer / admin / landing) rendered light
+ *   - html.dark[data-native="light"]  → light-designed pages (mechanic / auth / history) rendered dark
+ *
+ * Anything on a solid accent background (or marked data-keep-dark) keeps its original colours.
+ */
+
+:root {
+    --rx-ink: 10 10 10;
+    --rx-surface: 20 20 20;
+    --rx-line: 42 42 42;
+    --rx-muted: 161 161 170;
+}
+
+html.light {
+    --rx-ink: 244 245 247;
+    --rx-surface: 255 255 255;
+    --rx-line: 228 228 231;
+    --rx-muted: 82 82 91;
+    color-scheme: light;
+}
+
+html.dark {
+    color-scheme: dark;
+}
+
+/* ───────────── Dark-native pages rendered in light mode ───────────── */
+
+html.light[data-native="dark"] .\[color-scheme\:dark\] {
+    color-scheme: light;
+}
+
+/* Text */
+html.light[data-native="dark"] :is(.text-white, .text-zinc-100):not(:is(.bg-rx-accent, .bg-rx-accent *, .bg-zinc-800\/95 *, .bg-black\/60 *, [data-keep-dark], [data-keep-dark] *)) {
+    color: #0a0a0a;
+}
+html.light[data-native="dark"] :is(.text-white\/90, .text-white\/80, .text-white\/75, .text-white\/70):not(:is(.bg-rx-accent, .bg-rx-accent *, [data-keep-dark] *)) {
+    color: rgb(10 10 10 / 0.75);
+}
+html.light[data-native="dark"] :is(.text-white\/\[0\.06\], .text-white\/\[0\.05\]) {
+    color: rgb(0 0 0 / 0.05);
+}
+html.light[data-native="dark"] .text-zinc-200:not(:is(.bg-rx-accent *, [data-keep-dark] *)) { color: #27272a; }
+html.light[data-native="dark"] .text-zinc-300:not(:is(.bg-rx-accent *, [data-keep-dark] *)) { color: #3f3f46; }
+html.light[data-native="dark"] .text-zinc-400:not(:is(.bg-zinc-800\/95 *, [data-keep-dark] *)) { color: #52525b; }
+html.light[data-native="dark"] .text-zinc-600 { color: #a1a1aa; }
+html.light[data-native="dark"] :is(.text-blue-400, .text-blue-300):not(:is(.bg-rx-accent *)) { color: #1652f0; }
+html.light[data-native="dark"] .text-blue-200 { color: #1e40af; }
+html.light[data-native="dark"] .text-blue-400\/60 { color: rgb(22 82 240 / 0.7); }
+html.light[data-native="dark"] :is(.text-rose-400, .text-rose-300, .text-red-400, .text-red-300) { color: #e11d48; }
+
+/* Backgrounds */
+html.light[data-native="dark"] :is(.bg-white\/5, .bg-white\/\[0\.07\], .bg-white\/\[0\.06\]):not(:is(.bg-rx-accent *)) {
+    background-color: rgb(0 0 0 / 0.045);
+}
+html.light[data-native="dark"] :is(.bg-white\/\[0\.02\], .bg-white\/\[0\.03\], .bg-white\/\[0\.04\], .bg-white\/\[0\.05\]):not(:is(.bg-rx-accent *)) {
+    background-color: rgb(0 0 0 / 0.025);
+}
+html.light[data-native="dark"] :is(.bg-white\/10, .bg-white\/15, .bg-white\/20, .bg-white\/25):not(:is(.bg-rx-accent *, [data-keep-dark] *)) {
+    background-color: rgb(0 0 0 / 0.08);
+}
+html.light[data-native="dark"] :is(.bg-black\/20, .bg-black\/25, .bg-black\/30, .bg-black\/40):not(:is(.bg-rx-accent *)) {
+    background-color: rgb(0 0 0 / 0.05);
+}
+html.light[data-native="dark"] .bg-zinc-800\/95 {
+    background-color: rgb(24 24 27 / 0.95);
+}
+html.light[data-native="dark"] .bg-\[\#34343A\] { background-color: #52525b; }
+html.light[data-native="dark"] .bg-white:is(.h-\[2px\]) { background-color: #0a0a0a; }
+html.light[data-native="dark"] :is(.from-white\/\[0\.04\], .from-white\/\[0\.06\]) {
+    --tw-gradient-from: rgb(0 0 0 / 0.035) var(--tw-gradient-from-position);
+}
+
+/* Hover / focus states */
+html.light[data-native="dark"] .hover\:text-white:not(:is(.bg-rx-accent, .bg-rx-accent *)):hover,
+html.light[data-native="dark"] .group:hover .group-hover\:text-white:not(:is(.bg-rx-accent, .bg-rx-accent *)) {
+    color: #0a0a0a;
+}
+html.light[data-native="dark"] :is(.hover\:text-blue-400, .hover\:text-blue-300):hover { color: #0e3fc7; }
+html.light[data-native="dark"] :is(.hover\:text-rose-400):hover { color: #e11d48; }
+html.light[data-native="dark"] :is(.hover\:bg-white\/5, .hover\:bg-white\/\[0\.02\], .hover\:bg-white\/\[0\.05\], .hover\:bg-white\/\[0\.06\]):not(:is(.bg-rx-accent *)):hover {
+    background-color: rgb(0 0 0 / 0.05);
+}
+html.light[data-native="dark"] .hover\:bg-white\/10:not(:is(.bg-rx-accent *)):hover { background-color: rgb(0 0 0 / 0.08); }
+html.light[data-native="dark"] .focus\:bg-white\/\[0\.07\]:focus { background-color: #fff; }
+html.light[data-native="dark"] :is(.hover\:border-white\/20):hover { border-color: #a1a1aa; }
+
+/* Borders & rings */
+html.light[data-native="dark"] .border-white\/5 { border-color: #f0f0f2; }
+html.light[data-native="dark"] :is(.border-white\/10, .border-white\/15):not(:is(.bg-rx-accent *)) { border-color: #e4e4e7; }
+html.light[data-native="dark"] .border-white\/20:not(:is(.bg-rx-accent *)) { border-color: #d4d4d8; }
+html.light[data-native="dark"] .divide-white\/5 > :not([hidden]) ~ :not([hidden]) { border-color: #f0f0f2; }
+html.light[data-native="dark"] :is(.ring-white\/10, .ring-white\/15):not(:is(.bg-rx-accent, .bg-rx-accent *, [data-keep-dark], [data-keep-dark] *)) {
+    --tw-ring-color: rgb(0 0 0 / 0.1);
+}
+html.light[data-native="dark"] .placeholder-white\/40::placeholder { color: rgb(0 0 0 / 0.4); }
+
+/* Landing page header background once scrolled */
+html.light[data-native="dark"] #rx-header.rx-scrolled {
+    background-color: rgb(244 245 247 / 0.92);
+    border-bottom-color: #e4e4e7;
+}
+
+/* ───────────── Light-native pages rendered in dark mode ───────────── */
+
+html.dark[data-native="light"] body { background-color: #0a0a0a; color: #f4f4f5; }
+
+/* Surfaces */
+html.dark[data-native="light"] .bg-slate-50 { background-color: #0a0a0a; }
+html.dark[data-native="light"] .bg-white { background-color: #141414; }
+html.dark[data-native="light"] :is(.bg-slate-100, .hover\:bg-slate-100:hover) { background-color: rgb(255 255 255 / 0.07); }
+html.dark[data-native="light"] .hover\:bg-slate-50:hover { background-color: rgb(255 255 255 / 0.04); }
+html.dark[data-native="light"] .bg-slate-200 { background-color: rgb(255 255 255 / 0.12); }
+html.dark[data-native="light"] .bg-indigo-50 { background-color: rgb(99 102 241 / 0.15); }
+html.dark[data-native="light"] .hover\:bg-indigo-100:hover { background-color: rgb(99 102 241 / 0.25); }
+html.dark[data-native="light"] :is(.bg-red-50, .hover\:bg-red-50:hover) { background-color: rgb(239 68 68 / 0.12); }
+html.dark[data-native="light"] .hover\:bg-red-100:hover { background-color: rgb(239 68 68 / 0.2); }
+html.dark[data-native="light"] .bg-green-50 { background-color: rgb(34 197 94 / 0.12); }
+html.dark[data-native="light"] .bg-amber-50 { background-color: rgb(245 158 11 / 0.12); }
+html.dark[data-native="light"] .bg-emerald-50 { background-color: rgb(16 185 129 / 0.12); }
+html.dark[data-native="light"] .bg-gray-100 { background-color: rgb(255 255 255 / 0.07); }
+
+/* Text */
+html.dark[data-native="light"] :is(.text-slate-900, .text-slate-800, .text-gray-900, .text-gray-800) { color: #f4f4f5; }
+html.dark[data-native="light"] :is(.text-slate-700, .text-gray-700) { color: #d4d4d8; }
+html.dark[data-native="light"] :is(.text-slate-600, .text-slate-500, .text-gray-600, .text-gray-500) { color: #a1a1aa; }
+html.dark[data-native="light"] :is(.text-slate-400, .text-gray-400) { color: #71717a; }
+html.dark[data-native="light"] :is(.hover\:text-slate-900, .hover\:text-slate-700, .hover\:text-gray-900):hover { color: #fff; }
+html.dark[data-native="light"] .hover\:text-slate-600:hover { color: #d4d4d8; }
+html.dark[data-native="light"] :is(.text-indigo-600, .text-indigo-700) { color: #818cf8; }
+html.dark[data-native="light"] .hover\:text-indigo-700:hover { color: #a5b4fc; }
+html.dark[data-native="light"] :is(.text-red-600, .text-red-700, .text-red-900) { color: #f87171; }
+html.dark[data-native="light"] .hover\:text-red-900:hover { color: #fca5a5; }
+html.dark[data-native="light"] :is(.text-green-600, .text-green-700, .text-emerald-600, .text-emerald-700) { color: #4ade80; }
+html.dark[data-native="light"] :is(.text-amber-600, .text-amber-700) { color: #fbbf24; }
+
+/* Borders & rings */
+html.dark[data-native="light"] :is(.border-slate-100, .border-slate-200, .border-slate-200\/70, .border-gray-100, .border-gray-200) { border-color: #2a2a2a; }
+html.dark[data-native="light"] :is(.border-slate-300, .border-gray-300) { border-color: #3f3f46; }
+html.dark[data-native="light"] :is(.divide-slate-100, .divide-slate-200) > :not([hidden]) ~ :not([hidden]) { border-color: #2a2a2a; }
+html.dark[data-native="light"] :is(.ring-slate-200, .ring-slate-300, .ring-gray-200) { --tw-ring-color: #2a2a2a; }
+html.dark[data-native="light"] .ring-red-200 { --tw-ring-color: rgb(239 68 68 / 0.35); }
+html.dark[data-native="light"] .border-green-200 { border-color: rgb(34 197 94 / 0.35); }
+
+/* Form controls (styled by @tailwindcss/forms, not utilities) */
+html.dark[data-native="light"] :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea) {
+    background-color: #141414;
+    color: #f4f4f5;
+}
+html.dark[data-native="light"] :is(input, select, textarea)::placeholder { color: #71717a; }
